@@ -5,7 +5,7 @@ import { Container, Card, Content } from 'rbx';
 const ProductCards = ({ products }) => {
   const card = products.map(product => {
     return (
-      <Card>
+      <Card key={product.sku}>
         <Card.Content>
           <Content>
             {product.title}
