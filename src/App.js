@@ -1,4 +1,23 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import 'rbx/index.css';
+import { Container, Card, Content } from 'rbx';
+
+const ProductCards = ({ products }) => {
+  const card = products.map(product => {
+    return (
+      <Card>
+        <Card.Content>
+          <Content>
+            {product.title}
+          </Content>
+        </Card.Content>
+      </Card>
+    )
+  });
+  return(
+    <React.Fragment>{ card }</React.Fragment>
+  );
+};
 
 const App = () => {
   const [data, setData] = useState({}); // initialize data as an empty array with {}
@@ -13,9 +32,9 @@ const App = () => {
   }, []); // If the second arg is an empty list [], then the useEffect() function will only be called when the component is added (i.e., once).
 
   return (
-    <ul>
-      {products.map(product => <li key={product.sku}>{product.title}</li>)} 
-    </ul>
+    <Container>
+      <ProductCards products={products} />
+    </Container>
   );
 };
 
