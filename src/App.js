@@ -1,21 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import 'rbx/index.css';
-import { Container, Card, Content } from 'rbx';
+import { Container, Card, Content, Image, Column, Group } from 'rbx';
 
 const ProductCards = ({ products }) => {
-  const card = products.map(product => {
+  const cards = products.map(product => {
     return (
-      <Card key={product.sku}>
-        <Card.Content>
-          <Content>
-            {product.title}
-          </Content>
-        </Card.Content>
-      </Card>
+      <Column key={product.sku} size={3}>
+        <Card>
+          <Card.Image>
+            <Image.Container size="2by3">
+              <Image src={`./data/products/${product.sku}_1.jpg`} />
+            </Image.Container>
+          </Card.Image>
+          <Card.Content>
+            <Content>
+              {product.title}
+            </Content>
+          </Card.Content>
+        </Card>
+      </Column>
     )
   });
-  return(
-    <React.Fragment>{ card }</React.Fragment>
+
+  return (
+    <Column.Group multiline>
+      {cards}
+    </Column.Group>
   );
 };
 
