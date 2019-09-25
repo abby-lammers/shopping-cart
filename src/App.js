@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import 'rbx/index.css';
-import { Container, Card, Content, Image, Column, Group } from 'rbx';
+import { Button, Container, Card, Content, Image, Column, Title } from 'rbx';
+
+// from original shopping cart app (https://github.com/jeffersonRibeiro/react-shopping-cart/blob/master/src/services/util.js)
+export const formatPrice = (x, currency) => {
+  switch (currency) {
+    case 'BRL':
+      return x.toFixed(2).replace('.', ',');
+    default:
+      return x.toFixed(2);
+  }
+};
 
 const ProductCards = ({ products }) => {
   const cards = products.map(product => {
@@ -14,7 +24,13 @@ const ProductCards = ({ products }) => {
           </Card.Image>
           <Card.Content>
             <Content>
-              {product.title}
+              <h3>{product.title}</h3>
+              <p>{product.style}</p>
+              <b>${formatPrice(product.price, product.currencyId)}</b>
+              <Button.Group>
+                {product.availableSizes.map(size =>
+                  <Button key={size}>{size}</Button>)}
+              </Button.Group>
             </Content>
           </Card.Content>
         </Card>
@@ -43,6 +59,7 @@ const App = () => {
 
   return (
     <Container>
+      <Title>Shopping Cart</Title>
       <ProductCards products={products} />
     </Container>
   );
